@@ -197,7 +197,7 @@
 	vddio-supply = <&pm8953_l6>;
 
 	panel: panel@0 {
-		compatible = "huawei,milan-panel";
+		compatible = "huawei,tianma_focal8716_5p5_1080p_video";
 		reg = <0>;
 
 		backlight = <&pmi8950_wled>;
@@ -299,6 +299,20 @@
 		reg = <0x31>;
 	};
 
+};
+
+&lpass {
+	status = "okay";
+};
+
+&mdss {
+	status = "okay";
+};
+
+&mpss {
+	pll-supply = <&pm8953_l7>;
+
+	status = "okay";
 };
 
 &pm8953_resin {

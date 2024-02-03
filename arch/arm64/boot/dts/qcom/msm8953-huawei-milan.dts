@@ -147,6 +147,7 @@
 			reg = <0x0 0x86800000 0x0 0x0100000>;
 			label = "hwboot_fail_mem";
 		};
+
 	};
 };
 
@@ -553,16 +554,35 @@
 };
 
 &wcnss {
-	status = "okay";
-
 	vddpx-supply = <&pm8953_l5>;
+	status = "okay";
+};
+
+&wcnss_ctrl {
+	firmware-name = "qcom/WCNSS_hw_wlan_nv.bin";
 };
 
 &wcnss_iris {
-	compatible = "qcom,wcn3660b";
+	compatible = "qcom,wcn3620b" ,"qcom,wcn3660b";
 
 	vddxo-supply = <&pm8953_l7>;
 	vddrfa-supply = <&pm8953_l19>;
 	vddpa-supply = <&pm8953_l9>;
 	vdddig-supply = <&pm8953_l5>;
+	status = "okay";
+};
+
+&wcd_codec {
+	qcom,mbhc-vthreshold-high = <91 259 488 488 488>;
+	qcom,mbhc-vthreshold-low = <91 259 488 488 488>;
+};
+
+&sound_card {
+	status = "okay";
+
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&cdc_pdm_lines_act &cdc_pdm_lines_2_act &cdc_pdm_comp_lines_act>;
+	pinctrl-1 = <&cdc_pdm_lines_sus &cdc_pdm_lines_2_sus &cdc_pdm_comp_lines_act>;
+
+	model = "msm8916";
 };

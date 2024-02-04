@@ -263,6 +263,9 @@
 	speaker_codec: max98925@31 {
 		compatible = "maxim,max98925";
 		reg = <0x31>;
+		i2c-pull-up;
+		vdd-supply = <&pm8953_l5>;
+		vcc_i2c-supply = <&pm8953_l5>;
 	};
 
 };
@@ -558,17 +561,8 @@
 	status = "okay";
 };
 
-&wcnss_ctrl {
-	firmware-name = "qcom/WCNSS_hw_wlan_nv.bin";
-};
-
 &wcnss_iris {
-	compatible = "qcom,wcn3620b" ,"qcom,wcn3660b";
-
-	vddxo-supply = <&pm8953_l7>;
-	vddrfa-supply = <&pm8953_l19>;
-	vddpa-supply = <&pm8953_l9>;
-	vdddig-supply = <&pm8953_l5>;
+	compatible = "qcom,wnc3615", "qcom,wcn3620";
 	status = "okay";
 };
 

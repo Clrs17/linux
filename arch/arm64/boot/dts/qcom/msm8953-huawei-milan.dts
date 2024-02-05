@@ -81,12 +81,13 @@
 		#size-cells = <2>;
 		ranges;
 
+		/delete-node/qseecom@85b00000;
 		other_ext_mem: other_ext_region@83100000 {
 			reg = <0x0 0x83100000 0x0 0x3700000>;
 			no-map;
 		};
 
-
+		/delete-node/mpss@86c00000;
 		modem_mem: modem_region@86c00000 {
 			reg = <0x0 0x86c00000 0x0 0x5600000>;
 			no-map-fixup;
@@ -108,13 +109,7 @@
 			size = <0 0x09800000>;
 		};
 
-		adsp_mem: adsp_region@f6400000 {
-			compatible = "shared-dma-pool";
-			reusable;
-			size = <0 0x400000>;
-		};
-
-		gpu_mem: gpu_region@8F800000 {
+		gpu_mem: gpu_region@8f800000 {
 			compatible = "shared-dma-pool";
 			reusable;
 			alloc-ranges = <0x0 0x80000000 0x0 0x10000000>;

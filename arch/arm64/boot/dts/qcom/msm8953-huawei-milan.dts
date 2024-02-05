@@ -67,8 +67,8 @@
 	gpio-keys {
 		compatible = "gpio-keys";
 
-		pinctrl-names = "default";
 		pinctrl-0 = <&gpio_key_default>;
+		pinctrl-names = "default";
 
 		key-volume-up {
 			label = "Volume Up";
@@ -83,25 +83,22 @@
 		ranges;
 
 		other_ext_mem: other_ext_region@0 {
-			compatible = "removed-dma-pool";
 			no-map;
 			reg = <0x0 0x83100000 0x0 0x3700000>;
 		};
 
 		modem_mem: modem_region@0 {
-			compatible = "removed-dma-pool";
 			no-map-fixup;
 			reg = <0x0 0x86c00000 0x0 0x5600000>;
 		};
 		
 		reloc_mem: reloc_region@0 {
-			compatible = "removed-dma-pool";
 			no-map;
 			reg = <0x0 0x8c200000 0x0 0x1800000>;
 		};
 
 		srecorder_mem: srecorder_region@0 {
-			compatible = "removed-dma-pool", "srecorder_mem";
+			compatible = "srecorder_mem";
 			no-map;
 			reg = <0x0 0x8f100000 0x0 0x400000>;
 		};

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) 2023, Clrs17<2318678921@qq.com>
  * Copyright (c) 2023, bzy-080408<Bzy080408@outlook.com>
+ * Copyright (c) 2023, Clrs17<2318678921@qq.com>
  */
 /dts-v1/;
 
@@ -26,9 +26,8 @@
 	
 	battery: battery {
 		compatible = "simple-battery";
-
-		charge-full-design-microamp-hours = <3038000>;
-		constant-charge-current-max-microamp = <1000000>;
+		charge-full-design-microamp-hours = <3270000>;
+		constant-charge-current-max-microamp = <2000000>;
 		voltage-min-design-microvolt = <3400000>;
 		voltage-max-design-microvolt = <4400000>;
 	};
@@ -67,10 +66,9 @@
 
 	gpio-keys {
 		compatible = "gpio-keys";
-
-		pinctrl-names = "default";
+		
 		pinctrl-0 = <&gpio_key_default>;
-
+		pinctrl-names = "default";
 		key-volume-up {
 			label = "Volume Up";
 			gpios = <&tlmm 85 GPIO_ACTIVE_LOW>;
@@ -78,51 +76,45 @@
 		};
 	};
 
-
-
 	reserved-memory {
 		#address-cells = <2>;
 		#size-cells = <2>;
 		ranges;
 
-		other_ext_mem: other_ext_region@0 {
-			compatible = "removed-dma-pool";
-			no-map;
+		other_ext_mem: other_ext_region@83100000 {
 			reg = <0x0 0x83100000 0x0 0x3700000>;
+			no-map;
 		};
 
-		modem_mem: modem_region@0 {
-			compatible = "removed-dma-pool";
-			no-map-fixup;
+
+		modem_mem: modem_region@86c00000 {
 			reg = <0x0 0x86c00000 0x0 0x5600000>;
+			no-map-fixup;
 		};
 		
-		reloc_mem: reloc_region@0 {
-			compatible = "removed-dma-pool";
-			no-map;
+		reloc_mem: reloc_region@8c200000 {
 			reg = <0x0 0x8c200000 0x0 0x1800000>;
-		};
-
-		srecorder_mem: srecorder_region@0 {
-			compatible = "removed-dma-pool", "srecorder_mem";
 			no-map;
+		};
+		srecorder_mem: srecorder_region@8f100000 {
 			reg = <0x0 0x8f100000 0x0 0x400000>;
+			no-map;
 		};
 
-		secure_mem: secure_region@0 {
+		secure_mem: secure_region@f680000 {
 			compatible = "shared-dma-pool";
 			reusable;
 			alignment = <0 0x400000>;
 			size = <0 0x09800000>;
 		};
 
-		adsp_mem: adsp_region@0 {
+		adsp_mem: adsp_region@f6400000 {
 			compatible = "shared-dma-pool";
 			reusable;
 			size = <0 0x400000>;
 		};
 
-		gpu_mem: gpu_region@0 {
+		gpu_mem: gpu_region@8F800000 {
 			compatible = "shared-dma-pool";
 			reusable;
 			alloc-ranges = <0x0 0x80000000 0x0 0x10000000>;
@@ -130,7 +122,7 @@
 			size = <0 0x800000>;
 		};
 
-		hwlog_tz_mem: hwlog_tz_region@0 {
+		hwlog_tz_mem: hwlog_tz_region@92200000 {
 			linux,reserve-contiguous-region;
 			linux,reserve-region;
 			linux,remove-completely;
@@ -139,7 +131,7 @@
 			label = "hwlog_tz_mem";
 		};
 
-		hwboot_fail_mem: hwboot_fail_region@0 {
+		hwboot_fail_mem: hwboot_fail_region@86800000 {
 			linux,reserve-contiguous-region;
 			linux,reserve-region;
 			linux,remove-completely;
@@ -147,7 +139,6 @@
 			reg = <0x0 0x86800000 0x0 0x0100000>;
 			label = "hwboot_fail_mem";
 		};
-
 	};
 };
 
@@ -263,11 +254,7 @@
 	speaker_codec: max98925@31 {
 		compatible = "maxim,max98925";
 		reg = <0x31>;
-		i2c-pull-up;
-		vdd-supply = <&pm8953_l5>;
-		vcc_i2c-supply = <&pm8953_l5>;
 	};
-
 };
 
 &lpass {
@@ -280,7 +267,6 @@
 
 &mpss {
 	status = "okay";
-
 	mss-supply = <&pm8953_s1>;
 	pll-supply = <&pm8953_l7>;
 };
@@ -308,14 +294,12 @@
 	qcom,num-strings = <2>;
 	qcom,external-pfet;
 	qcom,cabc;
-
 	status = "okay";
 };
 
 &rpm_requests {
 	regulators {
 		compatible = "qcom,rpm-pm8953-regulators";
-
 		vdd_s1-supply = <&vph_pwr>;
 		vdd_s2-supply = <&vph_pwr>;
 		vdd_s3-supply = <&vph_pwr>;
@@ -452,8 +436,6 @@
 	status = "okay";
 };
 
-
-
 &tlmm {
 	gpio-reserved-ranges = <0 4>, <16 4>, <135 4>;
 
@@ -530,7 +512,6 @@
 &uart_0 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&uart_console_active>;
-
 	status = "okay";
 };
 
@@ -557,26 +538,14 @@
 };
 
 &wcnss {
-	vddpx-supply = <&pm8953_l5>;
 	status = "okay";
+	vddpx-supply = <&pm8953_l5>;
 };
 
 &wcnss_iris {
-	compatible = "qcom,wnc3615", "qcom,wcn3620";
-	status = "okay";
-};
-
-&wcd_codec {
-	qcom,mbhc-vthreshold-high = <91 259 488 488 488>;
-	qcom,mbhc-vthreshold-low = <91 259 488 488 488>;
-};
-
-&sound_card {
-	status = "okay";
-
-	pinctrl-names = "default", "sleep";
-	pinctrl-0 = <&cdc_pdm_lines_act &cdc_pdm_lines_2_act &cdc_pdm_comp_lines_act>;
-	pinctrl-1 = <&cdc_pdm_lines_sus &cdc_pdm_lines_2_sus &cdc_pdm_comp_lines_act>;
-
-	model = "msm8916";
+	compatible = "qcom,wcn3620";
+	vddxo-supply = <&pm8953_l7>;
+	vddrfa-supply = <&pm8953_l19>;
+	vddpa-supply = <&pm8953_l9>;
+	vdddig-supply = <&pm8953_l5>;
 };

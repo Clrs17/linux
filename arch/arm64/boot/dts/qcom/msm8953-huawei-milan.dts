@@ -201,7 +201,7 @@
 };
 &i2c_3 {
 	status = "okay";
-	focaltech@38 {
+	ft5406_ts: touchscreen@38 {
 		compatible = "edt,edt-ft5406", "edt,edt-ft5x06";
 		reg = <0x38>;
 
@@ -215,9 +215,10 @@
 
 		touchscreen-size-x = <1080>;
 		touchscreen-size-y = <1920>;
+		status = "okay";
 	};
 
-	synaptics@70 {
+	rmi4_ts: touchscreen@70 {
 		reg = <0x70>;
 		compatible = "syna,rmi4-i2c";
 		interrupts-parent = <&tlmm>;
@@ -247,7 +248,9 @@
 			touchscreen-x-mm = <68>;
 			touchscreen-y-mm = <122>;
 		};
+		status = "disabled";
 	};
+
 };
 
 
